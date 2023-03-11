@@ -1,48 +1,41 @@
-import { Formik } from 'formik';
+// import { Formik } from 'formik';
 import css from 'components/Searchbar/Searchbar.module.css';
 import PropTypes from 'prop-types';
-import { toast } from 'react-toastify';
 
 const SearchBar = props => {
-  const initialValues = {
-    inputValue: '',
-  };
+  const handleSubmit = e => {
+    e.preventDefault();
+    let initialValues = e.target[1].value;
+    console.log(e.target[1].value);
 
-  const handleSubmit = ({ inputValue }, { resetForm }) => {
-    if (inputValue.trim() === '') {
-        toast.error('Enter search query!', {
-            autoClose: 3000,
-          });
-      return 
+    if (initialValues.trim() === '') {
+      alert('Enter search query!');
+
+      return;
     }
 
-    props.onSubmit(inputValue);
-    resetForm();
+    props.onSubmit(initialValues);
   };
 
   return (
     <header className={css.search}>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        <form className={css.searchBar}>
-          <button type="submit" className={css.searchButton}>
-            <span className={css.searchLabel}>Search</span>
-          </button>
-          <input
-            className={css.formInput}
-            type="text"
-            name="inputValue"
-            placeholder="Search images and photos"
-          />
-        </form>
-      </Formik>
+      <form className={css.searchBar} onSubmit={handleSubmit}>
+        <button className={css.searchButton}>
+          <span className={css.searchLabel}>Search</span>
+        </button>
+        <input
+          className={css.formInput}
+          type="text"
+          name="inputValue"
+          placeholder="Search images and photos"
+        />
+      </form>
     </header>
   );
 };
-
-
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export {SearchBar};
+export { SearchBar };

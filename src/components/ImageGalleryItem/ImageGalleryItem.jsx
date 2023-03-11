@@ -9,24 +9,26 @@ export class ImageGalleryItem extends Component {
   };
 
   toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
+    this.setState({ showModal: true });
   };
 
+  onClose = () => {
+    this.setState({ showModal: false });
+  };
 
   render() {
     const { showModal } = this.state;
-    const { image, tags, largeImageURL } = this.props;
+    const { tags, largeImageURL, webformatURL } = this.props;
     return (
       <li className={css.imageGalleryItem}>
-        <img src={image} alt={tags} onClick={this.toggleModal} />
+        <img src={webformatURL} alt={tags} onClick={this.toggleModal} />
         {showModal && (
-        <Modal
-          onClose={this.toggleModal}
-          image={largeImageURL}
-          tags={tags}
-        />
+          <Modal
+            onClose={this.onClose}
+            image={largeImageURL}
+            tags={tags}
+            showModal={showModal}
+          />
         )}
       </li>
     );
@@ -34,8 +36,6 @@ export class ImageGalleryItem extends Component {
 }
 
 ImageGalleryItem.propTypes = {
-  image: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
   largeImageURL: PropTypes.string.isRequired,
 };
 

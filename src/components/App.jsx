@@ -17,7 +17,7 @@ export class App extends Component {
     error: null,
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const { query, page } = this.state;
     if (page !== prevState.page || query !== prevState.query) {
       this.setState({
@@ -25,15 +25,18 @@ export class App extends Component {
       });
 
       fetchData(query, page)
-        .then(data => {
-          this.setState(prevState => ({
-            images: [...prevState.images, ...data.hits],
-            showLoadMore: page < Math.ceil(data.totalHits / 12),
-          }));
-        })
-        .catch(error => console.log(error))
-        .finally(() => this.setState({ isLoading: false }));
-    }
+      .then(data => {
+
+        this.setState(prevState => ({
+          images: [...prevState.images, ...data.hits],
+          showLoadMore: page < Math.ceil(data.totalHits / 12),
+        }));
+        console.log(data.hits)
+      })
+      .catch(error => console.log(error))
+      .finally(() => this.setState({ loading: false }));
+  }
+
   }
 
   getValue = value => {
@@ -49,7 +52,7 @@ export class App extends Component {
 
     return (
       <div className={css.app}>
-        <SearchBar onSubmit={this.getValue} />
+        <SearchBar onSubmit={this.getValue}  />
         <ImageGallery data={images} />
         {loading && <Loader />}
         {!loading && showLoadMore && <LoadMore onLoad={this.onLoad} />}

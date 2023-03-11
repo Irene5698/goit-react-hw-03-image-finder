@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://pixabay.com/api/';
-const KEY_TO_PIXABAY = '12TS2iUidJjx1jUh8gUjyyFFFDbbuZ8MTr';
+const KEY_TO_PIXABAY = '23172148-3d8451c08bf51f1732f14e58d';
 
 async function fetchData(query, page) {
   try {
@@ -15,4 +15,4 @@ async function fetchData(query, page) {
   }
 }
 
-export {fetchData};
+export { fetchData };

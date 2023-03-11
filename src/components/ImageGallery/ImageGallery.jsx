@@ -1,17 +1,17 @@
-import css from 'components/ImageGallery/ImageGallery.module.css'
+import css from 'components/ImageGallery/ImageGallery.module.css';
+import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import PropTypes, { shape } from 'prop-types';
 
-
-const ImageGallery = ({ data }) => {
+const ImageGallery = ({ data, loadMore }) => {
   return (
     <>
       <ul className={css.imageGallery}>
-        {data.map(({ webformatURL, ...otherProps }, index) => (
-          <li className={css.imageGalleryItem}
+        {data.map(({ largeImageURL, webformatURL, ...otherProps }, index) => (
+          <ImageGalleryItem
+            webformatURL={webformatURL}
+            largeImageURL={largeImageURL}
             key={index}
-            image={webformatURL}
-            {...otherProps}
-          ></li>
+          />
         ))}
       </ul>
     </>

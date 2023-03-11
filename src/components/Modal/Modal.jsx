@@ -40,9 +40,9 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
   image: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
+  tags: PropTypes.string,
 };
 
-export {Modal};
-
+export { Modal };
