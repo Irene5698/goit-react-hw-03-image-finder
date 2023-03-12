@@ -1,4 +1,3 @@
-// import { Formik } from 'formik';
 import css from 'components/Searchbar/Searchbar.module.css';
 import PropTypes from 'prop-types';
 import { GoSearch } from 'react-icons/go';
