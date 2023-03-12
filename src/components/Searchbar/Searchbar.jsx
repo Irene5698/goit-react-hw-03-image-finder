@@ -1,6 +1,7 @@
 // import { Formik } from 'formik';
 import css from 'components/Searchbar/Searchbar.module.css';
 import PropTypes from 'prop-types';
+import { GoSearch } from 'react-icons/go';
 
 const SearchBar = props => {
   const handleSubmit = e => {
@@ -21,7 +22,7 @@ const SearchBar = props => {
     <header className={css.search}>
       <form className={css.searchBar} onSubmit={handleSubmit}>
         <button className={css.searchButton}>
-          <span className={css.searchLabel}>Search</span>
+          <GoSearch />
         </button>
         <input
           className={css.formInput}
